@@ -27,7 +27,7 @@ function App() {
 
 
     const [characters, setCharacters] = useState<Character[]>(results)
-    setCharacters(results)
+    // setCharacters(results) // causes too much re-renders
 
     return (
         <>
