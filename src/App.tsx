@@ -26,7 +26,8 @@ function App() {
     console.log(count)
 
 
-    const [characters, setCharcters] = useState<Character[]>(results)
+    const [characters, setCharacters] = useState<Character[]>(results)
+    setCharacters(results)
 
     return (
         <>
