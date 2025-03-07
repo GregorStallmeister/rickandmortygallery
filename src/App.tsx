@@ -2,7 +2,10 @@ import {useState} from "react";
 import {responseString} from "./responseString.tsx";
 import {Character} from "./Character.tsx";
 import {Response} from "./Response.tsx";
-import CharactersList from "./CharactersList.tsx";
+import Characters from "./Characters.tsx";
+import {Route, Routes} from "react-router-dom";
+import Home from "./Home.tsx";
+import Header from "./Header.tsx";
 
 function App() {
     // console.log(responseString)
@@ -26,27 +29,17 @@ function App() {
 
 
     const [characters, setCharacters] = useState<Character[]>(results)
-    const [input, setInput] = useState<string>("")
     // setCharacters(results) // causes too much re-renders
 
     return (
-        <>
-            <h1>Rick & Morty Characters:</h1>
-            <br/>&nbsp;<br/>
-            <input value={input} onChange={event => {
-                setInput(event.target.value)
-            }}/>
-            <button onClick={() => {
-                console.log("Button clicked")
-                const charactersFiltered: Character[] = characters.filter((character) => {
-                    return character.name.indexOf(input) >= 0
-                })
-                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                charactersFiltered.length > 0 ? setCharacters(charactersFiltered) : setInput("Name not known!")
-            }}>Filter
-            </button>
-            <CharactersList characters={characters}/>
-        </>
+        <><Header/>
+
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/home" element={<Home/>}/>
+                <Route path="/characters"
+                       element={<Characters characters={characters} setCharacters={setCharacters}/>}/>
+            </Routes></>
     )
 }
 
