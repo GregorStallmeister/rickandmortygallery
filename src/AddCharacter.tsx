@@ -32,7 +32,7 @@ export default function AddCharacter(props: Props) {
                 <br/>
                 <input name={"species"} value={newCharacter.species} placeholder={"species"} onChange={onChange}/>
                 <br/>
-                <button>Submit</button>
+                <button type={"submit"}>Submit</button>
             </form>
         </div>
     )
