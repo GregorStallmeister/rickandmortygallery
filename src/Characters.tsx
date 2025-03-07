@@ -5,6 +5,7 @@ import {useState} from "react";
 type Props = {
     characters: Character[],
     setCharacters: (characters: Character[]) => void
+    loadAllCharacters: () => void
 }
 
 export default function Characters(props: Props) {
@@ -18,7 +19,7 @@ export default function Characters(props: Props) {
                 setInput(event.target.value)
             }}/>
             <button onClick={() => {
-                console.log("Button clicked")
+                console.log("Button Filter clicked")
                 const charactersFiltered: Character[] = props.characters.filter((character) => {
                     return character.name.indexOf(input) >= 0
                 })
@@ -26,6 +27,10 @@ export default function Characters(props: Props) {
                 charactersFiltered.length > 0 ? props.setCharacters(charactersFiltered) : setInput("Name not known!")
             }}>Filter
             </button>
+            <button onClick={() => {
+                console.log("Button Reset clicked")
+                props.loadAllCharacters()
+            }}>Reset</button>
             <CharactersList characters={props.characters}/>
         </>
     )

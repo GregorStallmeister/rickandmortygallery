@@ -29,7 +29,12 @@ function App() {
 
 
     const [characters, setCharacters] = useState<Character[]>(results)
+
     // setCharacters(results) // causes too much re-renders
+
+    function loadAllCharacters() {
+        setCharacters(results)
+    }
 
     return (
         <><Header/>
@@ -38,7 +43,9 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/characters"
-                       element={<Characters characters={characters} setCharacters={setCharacters}/>}/>
+                       element={<Characters characters={characters}
+                                            setCharacters={setCharacters}
+                                            loadAllCharacters={loadAllCharacters}/>}/>
             </Routes></>
     )
 }
