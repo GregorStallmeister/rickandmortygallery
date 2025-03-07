@@ -6,6 +6,7 @@ import Characters from "./Characters.tsx";
 import {Route, Routes} from "react-router-dom";
 import Home from "./Home.tsx";
 import Header from "./Header.tsx";
+import AddCharacter from "./AddCharacter.tsx";
 
 function App() {
     // console.log(responseString)
@@ -46,6 +47,7 @@ function App() {
                        element={<Characters characters={characters}
                                             setCharacters={setCharacters}
                                             loadAllCharacters={loadAllCharacters}/>}/>
+                <Route path="/characters/add" element={<AddCharacter/>}/>
             </Routes></>
     )
 }
