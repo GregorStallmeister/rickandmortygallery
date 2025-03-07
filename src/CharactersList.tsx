@@ -6,8 +6,8 @@ type Props = {
 }
 
 export default function CharactersList(props: Props) {
-    console.log(props)
-    console.log(props.characters)
+    // console.log(props)
+    // console.log(props.characters)
 
     return (
         <div>
