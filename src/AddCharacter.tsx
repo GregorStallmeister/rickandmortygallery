@@ -1,13 +1,22 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import {Character} from "./Character.tsx";
+import {useNavigate} from "react-router-dom";
 
-export default function AddCharacter() {
+type Props = {
+    addCharacter: (newCharacter: Character) => void
+}
+
+export default function AddCharacter(props: Props) {
 
     const [newCharacter, setNewCharacter] = useState<Character>({id: undefined, name: "", status: "", gender: "", type: "", species: ""})
+    const navigate = useNavigate()
 
     function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         console.log("onSubmit was called")
+
+        props.addCharacter(newCharacter)
+        navigate("/characters")
     }
 
     function onChange(event: ChangeEvent<HTMLInputElement>) {
