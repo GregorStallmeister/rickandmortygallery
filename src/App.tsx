@@ -1,18 +1,19 @@
-import {useState} from "react";
-import {responseString} from "./responseString.tsx";
+import {useEffect, useState} from "react";
+// import {responseStringHardCoded} from "./responseStringHardCoded.tsx";
 import {Character} from "./Character.tsx";
-import {Response} from "./Response.tsx";
+// import {Response} from "./Response.tsx";
 import Characters from "./Characters.tsx";
 import {Route, Routes} from "react-router-dom";
 import Home from "./Home.tsx";
 import Header from "./Header.tsx";
 import AddCharacter from "./AddCharacter.tsx";
+import axios from "axios";
 
 function App() {
     // console.log(responseString)
-    const response: Response = JSON.parse(responseString)
+    // const response: Response = JSON.parse(responseString)
     // console.log(JSON.stringify(response))
-    const results: Character[] = response.results
+    // const results: Character[] = response.results
     // console.log(results)
     // console.log(JSON.stringify(results))
     // const character1: Character = results[0]
@@ -29,17 +30,44 @@ function App() {
     // console.log(count)
 
 
-    const [characters, setCharacters] = useState<Character[]>(results)
+    const [characters, setCharacters] = useState<Character[]>()
 
     // setCharacters(results) // causes too much re-renders
 
-    function loadAllCharacters() {
-        setCharacters(results)
+    function loadCharacters() {
+        // const responseString: string = responseStringHardCoded
+        // let responseString: string = ""
+        //
+        // axios.get("https://rickandmortyapi.com/api/character")
+        //     .then((response) => {
+        //         console.log(response)
+        //         responseString = JSON.stringify(response.data)
+        //         console.log(responseString)
+        //     })
+        //
+        // const response: Response = JSON.parse(responseString)
+        // const results: Character[] = response.results
+        // setCharacters(results)
+
+        axios.get("https://rickandmortyapi.com/api/character")
+            .then((response) => {
+                console.log(response)
+                setCharacters(response.data.results)
+            })
+            .catch((errorResponse) => {
+                console.log(errorResponse)
+                alert("Error occurred while fetching characters!")
+            })
     }
 
     function addCharacter(newCharacter: Character) {
         setCharacters([...characters, newCharacter])
     }
+
+    useEffect(() => {
+        console.log("First time rendering App!")
+        loadCharacters()
+    }, [])
 
     return (
         <><Header/>
@@ -50,7 +78,7 @@ function App() {
                 <Route path="/characters"
                        element={<Characters characters={characters}
                                             setCharacters={setCharacters}
-                                            loadAllCharacters={loadAllCharacters}/>}/>
+                                            loadCharacters={loadCharacters}/>}/>
                 <Route path="/characters/add" element={<AddCharacter addCharacter={addCharacter}/>}/>
             </Routes></>
     )

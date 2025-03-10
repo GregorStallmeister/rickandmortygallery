@@ -5,7 +5,7 @@ import {useState} from "react";
 type Props = {
     characters: Character[],
     setCharacters: (characters: Character[]) => void
-    loadAllCharacters: () => void
+    loadCharacters: () => void
 }
 
 export default function Characters(props: Props) {
@@ -29,7 +29,7 @@ export default function Characters(props: Props) {
             </button>
             <button onClick={() => {
                 console.log("Button Reset clicked")
-                props.loadAllCharacters()
+                props.loadCharacters()
             }}>Reset</button>
             <CharactersList characters={props.characters}/>
         </>

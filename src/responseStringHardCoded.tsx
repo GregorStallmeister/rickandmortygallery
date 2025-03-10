@@ -1,4 +1,4 @@
-export const responseString = '{\n' +
+export const responseStringHardCoded = '{\n' +
     '  "info": {\n' +
     '    "count": 826,\n' +
     '    "pages": 42,\n' +
