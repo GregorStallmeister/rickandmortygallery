@@ -8,6 +8,7 @@ import Home from "./Home.tsx";
 import Header from "./Header.tsx";
 import AddCharacter from "./AddCharacter.tsx";
 import axios from "axios";
+import {Info} from "./Info.tsx";
 
 function App() {
     // console.log(responseString)
@@ -31,6 +32,7 @@ function App() {
 
 
     const [characters, setCharacters] = useState<Character[]>()
+    const [info, setInfo] = useState<Info>()
 
     // setCharacters(results) // causes too much re-renders
 
@@ -52,7 +54,19 @@ function App() {
         axios.get("https://rickandmortyapi.com/api/character")
             .then((response) => {
                 console.log(response)
-                setCharacters(response.data.results)
+                const charactersToBeSet: Character[] = response.data.results
+                setCharacters(charactersToBeSet)
+                console.log("charactersToBeSet:")
+                console.log(charactersToBeSet)
+                console.log("characters:")
+                console.log(characters)
+
+                const infoToBeSet: Info = response.data.info
+                setInfo(infoToBeSet)
+                console.log("infoToBeSet:")
+                console.log(infoToBeSet)
+                console.log("info:")
+                console.log(info)
             })
             .catch((errorResponse) => {
                 console.log(errorResponse)
@@ -65,7 +79,7 @@ function App() {
     }
 
     useEffect(() => {
-        console.log("First time rendering App!")
+        console.log("Mounting App!")
         loadCharacters()
     }, [])
 
